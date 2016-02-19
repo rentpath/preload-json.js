@@ -7,8 +7,10 @@ $ npm i --save parallel-data
 ```
 
 ## Usage
-```javascript
-
+```bash
+npm run demo
+open http://localhost:3000/
+Now open your console
 ```
 
 ## Scripts
