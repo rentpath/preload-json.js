@@ -1,24 +1,32 @@
 
+var subscribers = {};
+
 function notify (name, data) {
   console.log('notify', name)
+  let toNotify = subscribers[name] || [];
+  for (let i = 0, len = toNotify.length; i < len; i++) {
+    toNotify[i](data)
+  }
 }
 
 function subscribe (name, callback) {
   console.log('subscribe', name)
+  subscribers[name] = subscribers[name] || []
+  subscribers[name].push(callback)
 }
 
-export function push(command) {
-  console.log('push', command);
+function push(command) {
+  console.log('cmd', command);
   var action = command[0]
-  var argument = command.shift()
+  command.shift()
 
   // white-list actions
   switch (action) {
     case 'notify':
-      notify.apply(this, arguments)
+      notify.apply(this, command)
       break;
     case 'subscribe':
-      subscribe.apply(this, arguments)
+      subscribe.apply(this, command)
       break;
   }
 }
@@ -32,4 +40,4 @@ if (typeof window === 'object' && typeof window.parallelData !== 'undefined') {
   window.parallelData = { push: push }
 }
 
-export default {}
+export default { push: push }

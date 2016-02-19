@@ -5,12 +5,13 @@
 
     <script type="text/javascript">
       var parallelData = parallelData || [];
-      function setupParallelData (name, w) {
+      function setupParallelData (name, scope) {
         var callback = "_receiveParallelData_" + name
-        w[callback] = function (data) {
+        scope[callback] = function (data) {
           console.log('JSONP data', name, data)
           parallelData.push([
             'notify',
+            name,
             data
           ])
         }
@@ -23,6 +24,7 @@
       })
 
     </script>
+    <script src="lib/parallel-data.js" async defer></script>
     <script src="my-lib.js" async defer></script>
   </head>
   <body>

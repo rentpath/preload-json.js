@@ -5,7 +5,6 @@ var data;
 
 request.onload = function() {
   if (this.status >= 200 && this.status < 400) {
-    // Success!
     data = JSON.parse(this.response)
     console.log('AJAX data', data)
   } else {
@@ -15,15 +14,16 @@ request.onload = function() {
 
 request.onerror = function() {
   console.log('loading error')
-  // There was a connection error of some sort
 }
 
 request.send()
 
-
-// PD
-
-
-
-//
-//
+// parallel-data!
+window.parallelData = window.parallelData || []
+window.parallelData.push([
+  'subscribe',
+  'githubEvents',
+  function(d) {
+    console.log('my lib notified!', d)
+  }
+])
