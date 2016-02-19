@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Demo</title>
+
+    <script type="text/javascript">
+      var parallelData = parallelData || [];
+      function setupParallelData (name, w) {
+        var callback = "_receiveParallelData_" + name
+        w[callback] = function (data) {
+          console.log('JSONP data', name, data)
+          parallelData.push([
+            'notify',
+            data
+          ])
+        }
+      }
+      setupParallelData('githubEvents', window)
+
+      console.log('Inline <head> JS');
+      document.addEventListener("DOMContentLoaded", function(event) {
+        console.log("DOMContentLoaded")
+      })
+
+    </script>
+    <script src="my-lib.js" async defer></script>
+  </head>
+  <body>
+    <!--
+      Load Data
+    -->
+    <script src="https://api.github.com/users/c0/events?callback=_receiveParallelData_githubEvents" async defer></script>
+  </body>
+</html>
