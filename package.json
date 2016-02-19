@@ -44,5 +44,10 @@
   "engines": {
     "node": ">=4.2.1",
     "npm": ">=3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
