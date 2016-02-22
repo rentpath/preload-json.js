@@ -1,5 +1,15 @@
-# preload-json
-Load data quickly with JSONP
+# Preload JSON
+`preload-json.js` allows you to prefetch JSON before it's needed. This lib exists
+until [`link[rel=prefetch]`](http://caniuse.com/#feat=link-rel-prefetch) or [`link[rel=preload]`](https://w3c.github.io/preload/) are widely adopted.
+
+## Scenarios
+
+There are times when this is useful:
+
+- Page is heavily cached and you need to load dynamic content (e.g. user data)
+- Preload data for content below the fold or behind an interaction.
+
+For more rationale, read about [Prefetching, preloading, and prebrowsing](https://css-tricks.com/prefetching-preloading-prebrowsing/)
 
 ## Installation
 ```bash
