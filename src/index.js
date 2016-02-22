@@ -14,6 +14,7 @@ function subscribe(name, callback) {
   subscribers[name].push(callback)
   if (notifyQueue.hasOwnProperty(name)) {
     callback(notifyQueue[name])
+    delete notifyQueue[name]
   }
 }
 

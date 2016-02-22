@@ -32,6 +32,16 @@ describe('preload-json.js', function() {
       expect(callback).to.have.been.called
       expect(callback).to.have.been.calledWith(data)
     })
+
+    it('clears the notify queue once its used', function() {
+      const first = sinon.spy()
+      const second = sinon.spy()
+      notify('foo', { foo: 'bar' })
+      subscribe('foo', first)
+      subscribe('foo', second)
+      expect(first).to.have.been.called
+      expect(second).not.to.have.been.called
+    })
   })
 
   context('browser environment', function() {
