@@ -19,7 +19,7 @@
     "compile:watch": "npm run compile -- --watch",
     "lint": "eslint src test",
     "lint:fix": "npm run lint -- --fix",
-    "test": "mocha --compilers js:babel-core/register --timeout 5000 --recursive",
+    "test": "mocha",
     "test:watch": "npm run test -- --watch",
     "test:cov": "babel-node `npm bin`/istanbul cover `npm bin`/_mocha -- --recursive",
     "preversion": "npm run lint && npm test",
@@ -42,6 +42,7 @@
     "jsdom-global": "1.6.1",
     "mocha": "^2.3.4",
     "sinon": "^1.17.3",
+    "sinon-chai": "2.8.0",
     "webpack": "1.12.13"
   },
   "engines": {

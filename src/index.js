@@ -1,4 +1,4 @@
-const subscribers = {}
+let subscribers = {}
 
 function notify(name, data) {
   console.log('notify', name)
@@ -32,6 +32,10 @@ function cmd(commandArgs) {
   }
 }
 
+function reset() {
+  subscribers = {}
+}
+
 // Hookup
 if (typeof window === 'object' && typeof window.parallelData !== 'undefined') {
   while (window.parallelData.length) {
@@ -41,4 +45,4 @@ if (typeof window === 'object' && typeof window.parallelData !== 'undefined') {
   window.parallelData = { push: cmd }
 }
 
-export default { push: cmd, cmd, notify, subscribe }
+export default { push: cmd, cmd, notify, subscribe, reset }

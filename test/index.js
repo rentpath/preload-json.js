@@ -1,23 +1,27 @@
 import sinon from 'sinon'
 import { expect } from 'chai'
-import { notify, subscribe } from '../src'
+import { notify, subscribe, reset } from '../src'
 
 describe('preload-json.js', function() {
+  after(function() {
+    reset()
+  })
+
   describe('#notify', function() {
     it('calls the callback with a valid name', function() {
       const callback = sinon.spy()
       const data = { foo: 'bar' }
       subscribe('foo', callback)
       notify('foo', data)
-      expect(callback.called).to.equal(true)
-      expect(callback.calledWith(data)).to.equal(true)
+      expect(callback).to.have.been.called
+      expect(callback).to.have.been.calledWith(data)
     })
 
     it('does not call the callback with an invalid name', function() {
       const callback = sinon.spy()
       subscribe('foo', callback)
       notify('bar', {})
-      expect(callback.called).to.equal(false)
+      expect(callback).not.to.have.been.called
     })
   })
 
