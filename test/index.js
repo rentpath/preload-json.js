@@ -1,23 +1,37 @@
 import sinon from 'sinon'
 import { expect } from 'chai'
-import parallelData from '../src'
+import { notify, subscribe } from '../src'
 
-describe('parallelData', function () {
-  it('should be defined', function () {
-    expect(parallelData).to.exist
+describe('preload-json.js', function() {
+  describe('#notify', function() {
+    it('calls the callback with a valid name', function() {
+      const callback = sinon.spy()
+      const data = { foo: 'bar' }
+      subscribe('foo', callback)
+      notify('foo', data)
+      expect(callback.called).to.equal(true)
+      expect(callback.calledWith(data)).to.equal(true)
+    })
+
+    it('does not call the callback with an invalid name', function() {
+      const callback = sinon.spy()
+      subscribe('foo', callback)
+      notify('bar', {})
+      expect(callback.called).to.equal(false)
+    })
   })
 
-  context('browser environment', function () {
-    before(function () {
+  context('browser environment', function() {
+    before(function() {
       this.jsdom = require('jsdom-global')()
     })
 
-    after(function () {
+    after(function() {
       this.jsdom()
     })
 
-    it('has a global window object', function () {
-      expect(typeof window).to.not.equal('undefined')
-    })
+    it('runs commands from window')
+
+    it('replaces the window queue with the lib')
   })
 })

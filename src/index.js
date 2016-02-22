@@ -14,18 +14,18 @@ function subscribe(name, callback) {
   subscribers[name].push(callback)
 }
 
-function push(command) {
-  const action = command[0]
-  console.log('cmd', command)
-  command.shift()
+function cmd(commandArgs) {
+  const action = commandArgs[0]
+  console.log('cmd', commandArgs)
+  commandArgs.shift()
 
   // white-list actions
   switch (action) {
     case 'notify':
-      notify.apply(this, command)
+      notify.apply(this, commandArgs)
       break
     case 'subscribe':
-      subscribe.apply(this, command)
+      subscribe.apply(this, commandArgs)
       break
     default:
       // no-op
@@ -35,10 +35,10 @@ function push(command) {
 // Hookup
 if (typeof window === 'object' && typeof window.parallelData !== 'undefined') {
   while (window.parallelData.length) {
-    push(window.parallelData.shift())
+    cmd(window.parallelData.shift())
   }
   console.log('replace window.parallelData')
-  window.parallelData = { push }
+  window.parallelData = { push: cmd }
 }
 
-export default { push }
+export default { push: cmd, cmd, notify, subscribe }
