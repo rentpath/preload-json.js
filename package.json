@@ -1,15 +1,15 @@
 {
   "version": "0.0.1",
-  "name": "parallel-data",
+  "name": "preload-json",
   "description": "Load data quickly with JSONP",
   "license": "MIT",
-  "homepage": "https://github.com/rentpath/parallel-data",
+  "homepage": "https://github.com/rentpath/preload-json",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rentpath/parallel-data.git"
+    "url": "https://github.com/rentpath/preload-json.git"
   },
   "bugs": {
-    "url": "https://github.com/rentpath/parallel-data/issues"
+    "url": "https://github.com/rentpath/preload-json/issues"
   },
   "main": "index.js",
   "scripts": {

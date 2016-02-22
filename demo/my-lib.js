@@ -18,7 +18,7 @@ request.onerror = function() {
 
 request.send()
 
-// parallel-data!
+// preload-json!
 window.parallelData = window.parallelData || []
 window.parallelData.push([
   'subscribe',

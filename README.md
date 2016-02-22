@@ -1,9 +1,9 @@
-# parallel-data
+# preload-json
 Load data quickly with JSONP
 
 ## Installation
 ```bash
-$ npm i --save parallel-data
+$ npm i --save preload-json
 ```
 
 ## Usage
