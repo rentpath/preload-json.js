@@ -1,17 +1,20 @@
 let subscribers = {}
+let notifyQueue = {}
 
 function notify(name, data) {
-  console.log('notify', name)
   const toNotify = subscribers[name] || []
   for (let i = 0, len = toNotify.length; i < len; i++) {
     toNotify[i](data)
   }
+  notifyQueue[name] = data
 }
 
 function subscribe(name, callback) {
-  console.log('subscribe', name)
   subscribers[name] = subscribers[name] || []
   subscribers[name].push(callback)
+  if (notifyQueue.hasOwnProperty(name)) {
+    callback(notifyQueue[name])
+  }
 }
 
 function cmd(commandArgs) {
@@ -34,6 +37,7 @@ function cmd(commandArgs) {
 
 function reset() {
   subscribers = {}
+  notifyQueue = {}
 }
 
 // Hookup

@@ -3,11 +3,11 @@ import { expect } from 'chai'
 import { notify, subscribe, reset } from '../src'
 
 describe('preload-json.js', function() {
-  after(function() {
-    reset()
-  })
-
   describe('#notify', function() {
+    afterEach(function() {
+      reset()
+    })
+
     it('calls the callback with a valid name', function() {
       const callback = sinon.spy()
       const data = { foo: 'bar' }
@@ -22,6 +22,15 @@ describe('preload-json.js', function() {
       subscribe('foo', callback)
       notify('bar', {})
       expect(callback).not.to.have.been.called
+    })
+
+    it('calls the callback when subscribing after notifying', function() {
+      const callback = sinon.spy()
+      const data = { foo: 'bar' }
+      notify('foo', data)
+      subscribe('foo', callback)
+      expect(callback).to.have.been.called
+      expect(callback).to.have.been.calledWith(data)
     })
   })
 
