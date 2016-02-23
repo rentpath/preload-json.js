@@ -1,5 +1,6 @@
 let subscribers = {}
 let notifyQueue = {}
+const queueName = 'pjQueue'
 
 function notify(name, data) {
   const toNotify = subscribers[name] || []
@@ -34,9 +35,9 @@ function reset() {
 }
 
 function applyCommandQueue(scope) {
-  if (typeof scope.preloadJSON !== 'undefined') {
-    while (scope.preloadJSON.length) {
-      cmd(scope.preloadJSON.shift())
+  if (typeof scope[queueName] !== 'undefined') {
+    while (scope[queueName].length) {
+      cmd(scope[queueName].shift())
     }
   }
 }
@@ -44,7 +45,7 @@ function applyCommandQueue(scope) {
 // Hookup to globals
 if (typeof window === 'object') {
   applyCommandQueue(window)
-  window.preloadJSON = { push: cmd }
+  window[queueName] = { push: cmd }
 }
 
 export default {

@@ -2,35 +2,15 @@
 <html>
   <head>
     <title>Demo</title>
-
     <script type="text/javascript">
-      // TODO: wrap this up in a little script
-      var preloadJSON = preloadJSON || [];
-      function setupPreloadJSON (name, scope) {
-        var callback = "_receivePreloadJSON_" + name
-        scope[callback] = function (data) {
-          console.log('JSONP data', name, data)
-          preloadJSON.push([
-            'notify',
-            name,
-            data
-          ])
-        }
-      }
-      setupPreloadJSON('githubEvents', window)
-
-      console.log('Inline <head> JS');
-      document.addEventListener("DOMContentLoaded", function(event) {
-        console.log("DOMContentLoaded")
-      })
-
+      !function(n,e,i){function o(e){n["pjReceive_"+e]=function(o){n[i].push(["notify",e,o])}}n[i]=n[i]||[],n[e]={register:function(){for(var n=0,e=arguments.length;e>n;n++)o(arguments[n])}}}(window,"pj","pjQueue");
+      pj.register('githubEvents')
     </script>
+    <!-- Lib that consumes the data -->
     <script src="demo.js" async defer></script>
   </head>
   <body>
-    <!--
-      Load Data
-    -->
-    <script src="https://api.github.com/users/c0/events?callback=_receivePreloadJSON_githubEvents" async defer></script>
+    <!-- Load Data -->
+    <script src="https://api.github.com/users/c0/events?callback=pjReceive_githubEvents" async defer></script>
   </body>
 </html>

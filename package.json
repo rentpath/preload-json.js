@@ -17,6 +17,7 @@
     "compile": "babel -d lib src",
     "compile:demo": "webpack --config webpack.demo.js",
     "compile:watch": "npm run compile -- --watch",
+    "compile:register": "uglifyjs --screw-ie8 -cm -o lib/register.js src/register.js",
     "lint": "eslint src test",
     "lint:fix": "npm run lint -- --fix",
     "test": "mocha",
