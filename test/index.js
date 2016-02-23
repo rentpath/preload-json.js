@@ -1,6 +1,6 @@
 import sinon from 'sinon'
 import { expect } from 'chai'
-import { notify, subscribe, reset } from '../src'
+import { notify, subscribe, cmd, reset } from '../src'
 
 describe('preload-json.js', function() {
   describe('#notify', function() {
@@ -41,6 +41,30 @@ describe('preload-json.js', function() {
       subscribe('foo', second)
       expect(first).to.have.been.called
       expect(second).not.to.have.been.called
+    })
+  })
+
+  describe('#cmd', function() {
+    afterEach(function() {
+      reset()
+    })
+
+    it('allows subscribing', function() {
+      const callback = sinon.spy()
+      const data = { foo: 'bar' }
+      cmd(['subscribe', 'foo', callback])
+      notify('foo', data)
+      expect(callback).to.have.been.called
+      expect(callback).to.have.been.calledWith(data)
+    })
+
+    it('notifies subscribers', function() {
+      const callback = sinon.spy()
+      const data = { foo: 'bar' }
+      subscribe('foo', callback)
+      cmd(['notify', 'foo', data])
+      expect(callback).to.have.been.called
+      expect(callback).to.have.been.calledWith(data)
     })
   })
 

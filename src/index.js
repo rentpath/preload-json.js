@@ -12,6 +12,7 @@ function notify(name, data) {
 function subscribe(name, callback) {
   subscribers[name] = subscribers[name] || []
   subscribers[name].push(callback)
+
   if (notifyQueue.hasOwnProperty(name)) {
     callback(notifyQueue[name])
     delete notifyQueue[name]
@@ -19,20 +20,11 @@ function subscribe(name, callback) {
 }
 
 function cmd(commandArgs) {
-  const action = commandArgs[0]
-  console.log('cmd', commandArgs)
-  commandArgs.shift()
-
-  // white-list actions
-  switch (action) {
-    case 'notify':
-      notify.apply(this, commandArgs)
-      break
-    case 'subscribe':
-      subscribe.apply(this, commandArgs)
-      break
-    default:
-      // no-op
+  const [action, name, args] = commandArgs
+  if (action === 'notify') {
+    notify(name, args)
+  } else if (action === 'subscribe') {
+    subscribe(name, args)
   }
 }
 
