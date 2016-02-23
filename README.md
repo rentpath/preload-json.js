@@ -17,6 +17,42 @@ $ npm i --save preload-json
 ```
 
 ## Usage
+
+First, determine a name for the data set. This will be used when requesting and receiving it.
+
+In `<head>`
+
+```html
+<script type="text/javascript">
+  // Automatically setup JSONP receivers and interface with `preload-json.js`
+  !function(n,e,i){function o(e){n["pjReceive_"+e]=function(o){n[i].push(["notify",e,o])}}n[i]=n[i]||[],n[e]={register:function(){for(var n=0,e=arguments.length;e>n;n++)o(arguments[n])}}}(window,"pj","pjQueue");
+
+  // Register JSONP handlers
+  pj.register('dataSetName')
+</script>
+```
+
+Before the closing `</body>`
+
+```html
+<script src="http://example.com/data.json?callback=pjReceive_dataSetName" async defer></script>
+```
+
+NOTE: The JSONP callback *must* be prefixed with `pjReceive_`
+
+In the app consuming the data
+
+```js
+import { subscribe } from './index'
+
+subscribe('dataSetName', data => {
+  console.log('my lib has the data!', data)
+})
+
+```
+
+
+## Demo
 ```bash
 npm run demo
 open http://localhost:3000/
