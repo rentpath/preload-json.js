@@ -14,8 +14,8 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf lib",
-    "compile": "webpack",
-    "compile:demo": "webpack --output-path demo",
+    "compile": "babel -d lib src",
+    "compile:demo": "webpack --config webpack.demo.js",
     "compile:watch": "npm run compile -- --watch",
     "lint": "eslint src test",
     "lint:fix": "npm run lint -- --fix",

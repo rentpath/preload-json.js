@@ -5,19 +5,19 @@
 
     <script type="text/javascript">
       // TODO: wrap this up in a little script
-      var parallelData = parallelData || [];
-      function setupParallelData (name, scope) {
-        var callback = "_receiveParallelData_" + name
+      var preloadJSON = preloadJSON || [];
+      function setupPreloadJSON (name, scope) {
+        var callback = "_receivePreloadJSON_" + name
         scope[callback] = function (data) {
           console.log('JSONP data', name, data)
-          parallelData.push([
+          preloadJSON.push([
             'notify',
             name,
             data
           ])
         }
       }
-      setupParallelData('githubEvents', window)
+      setupPreloadJSON('githubEvents', window)
 
       console.log('Inline <head> JS');
       document.addEventListener("DOMContentLoaded", function(event) {
@@ -25,13 +25,12 @@
       })
 
     </script>
-    <script src="lib/preload-json.js" async defer></script>
-    <script src="my-lib.js" async defer></script>
+    <script src="demo.js" async defer></script>
   </head>
   <body>
     <!--
       Load Data
     -->
-    <script src="https://api.github.com/users/c0/events?callback=_receiveParallelData_githubEvents" async defer></script>
+    <script src="https://api.github.com/users/c0/events?callback=_receivePreloadJSON_githubEvents" async defer></script>
   </body>
 </html>
