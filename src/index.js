@@ -47,4 +47,10 @@ if (typeof window === 'object') {
   window.parallelData = { push: cmd }
 }
 
-export default { push: cmd, cmd, notify, subscribe, reset, applyCommandQueue }
+export default {
+  cmd,
+  notify,
+  subscribe,
+  reset,
+  applyCommandQueue
+}
