@@ -38,12 +38,12 @@ Before the closing `</body>`
 <script src="http://example.com/data.json?callback=pjReceive_dataSetName" async defer></script>
 ```
 
-NOTE: The JSONP callback *must* be prefixed with `pjReceive_`
+**NOTE**: The JSONP callback *must* be prefixed with `pjReceive_`
 
 In the app consuming the data
 
 ```js
-import { subscribe } from './index'
+import { subscribe } from 'preload-json'
 
 subscribe('dataSetName', data => {
   console.log('my lib has the data!', data)
