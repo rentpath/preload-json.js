@@ -33,13 +33,18 @@ function reset() {
   notifyQueue = {}
 }
 
-// Hookup
-if (typeof window === 'object' && typeof window.parallelData !== 'undefined') {
-  while (window.parallelData.length) {
-    cmd(window.parallelData.shift())
+function applyCommandQueue(scope) {
+  if (typeof scope.parallelData !== 'undefined') {
+    while (scope.parallelData.length) {
+      cmd(scope.parallelData.shift())
+    }
   }
-  console.log('replace window.parallelData')
+}
+
+// Hookup to globals
+if (typeof window === 'object') {
+  applyCommandQueue(window)
   window.parallelData = { push: cmd }
 }
 
-export default { push: cmd, cmd, notify, subscribe, reset }
+export default { push: cmd, cmd, notify, subscribe, reset, applyCommandQueue }

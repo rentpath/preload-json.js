@@ -1,6 +1,6 @@
 import sinon from 'sinon'
 import { expect } from 'chai'
-import { notify, subscribe, cmd, reset } from '../src'
+import { notify, subscribe, cmd, reset, applyCommandQueue } from '../src'
 
 describe('preload-json.js', function() {
   describe('#notify', function() {
@@ -68,7 +68,7 @@ describe('preload-json.js', function() {
     })
   })
 
-  context('browser environment', function() {
+  describe('#applyCommandQueue', function() {
     before(function() {
       this.jsdom = require('jsdom-global')()
     })
@@ -77,8 +77,18 @@ describe('preload-json.js', function() {
       this.jsdom()
     })
 
-    it('runs commands from window')
+    it('runs commands from window', function() {
+      const callback = sinon.spy()
+      const data = { foo: 'bar' }
 
-    it('replaces the window queue with the lib')
+      window.parallelData = [
+        ['subscribe', 'foo', callback],
+        ['notify', 'foo', data]
+      ]
+
+      applyCommandQueue(window)
+      expect(callback).to.have.been.called
+      expect(callback).to.have.been.calledWith(data)
+    })
   })
 })
