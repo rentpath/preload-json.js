@@ -81,7 +81,7 @@ describe('preload-json.js', function() {
       const callback = sinon.spy()
       const data = { foo: 'bar' }
 
-      window.parallelData = [
+      window.preloadJSON = [
         ['subscribe', 'foo', callback],
         ['notify', 'foo', data]
       ]

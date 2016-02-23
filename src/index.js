@@ -34,9 +34,9 @@ function reset() {
 }
 
 function applyCommandQueue(scope) {
-  if (typeof scope.parallelData !== 'undefined') {
-    while (scope.parallelData.length) {
-      cmd(scope.parallelData.shift())
+  if (typeof scope.preloadJSON !== 'undefined') {
+    while (scope.preloadJSON.length) {
+      cmd(scope.preloadJSON.shift())
     }
   }
 }
@@ -44,7 +44,7 @@ function applyCommandQueue(scope) {
 // Hookup to globals
 if (typeof window === 'object') {
   applyCommandQueue(window)
-  window.parallelData = { push: cmd }
+  window.preloadJSON = { push: cmd }
 }
 
 export default {
