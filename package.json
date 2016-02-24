@@ -3,13 +3,13 @@
   "name": "preload-json",
   "description": "Load data quickly with JSONP",
   "license": "MIT",
-  "homepage": "https://github.com/rentpath/preload-json",
+  "homepage": "https://github.com/rentpath/preload-json.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rentpath/preload-json.git"
+    "url": "https://github.com/rentpath/preload-json.js.git"
   },
   "bugs": {
-    "url": "https://github.com/rentpath/preload-json/issues"
+    "url": "https://github.com/rentpath/preload-json.js/issues"
   },
   "main": "index.js",
   "scripts": {
