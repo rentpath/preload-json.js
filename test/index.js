@@ -81,7 +81,7 @@ describe('preload-json.js', function() {
       const callback = sinon.spy()
       const data = { foo: 'bar' }
 
-      window.preloadJSON = [
+      window.pjQueue = [
         ['subscribe', 'foo', callback],
         ['notify', 'foo', data]
       ]
