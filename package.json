@@ -1,15 +1,15 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.0-semantically-released",
   "name": "preload-json",
   "description": "Load data quickly with JSONP",
   "license": "MIT",
-  "homepage": "https://github.com/rentpath/preload-json",
+  "homepage": "https://github.com/rentpath/preload-json.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rentpath/preload-json.git"
+    "url": "https://github.com/rentpath/preload-json.js.git"
   },
   "bugs": {
-    "url": "https://github.com/rentpath/preload-json/issues"
+    "url": "https://github.com/rentpath/preload-json.js/issues"
   },
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,7 @@
     "test:watch": "npm run test -- --watch",
     "test:cov": "babel-node `npm bin`/istanbul cover `npm bin`/_mocha -- --recursive",
     "preversion": "npm run lint && npm test",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "version": "npm run compile && git add -A lib",
     "postversion": "git push --follow-tags",
     "demo": "npm run compile:demo && serve demo"
@@ -42,8 +43,10 @@
     "jsdom": "8.0.2",
     "jsdom-global": "1.6.1",
     "mocha": "^2.3.4",
+    "semantic-release": "^4.3.5",
     "sinon": "^1.17.3",
     "sinon-chai": "2.8.0",
+    "uglifyjs": "2.4.10",
     "webpack": "1.12.13"
   },
   "engines": {

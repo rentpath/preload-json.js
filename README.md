@@ -1,4 +1,6 @@
 # Preload JSON
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=plastic)](https://github.com/semantic-release/semantic-release)
+
 `preload-json.js` allows you to prefetch JSON before it's needed. This lib exists
 until [`link[rel=prefetch]`](http://caniuse.com/#feat=link-rel-prefetch) or [`link[rel=preload]`](https://w3c.github.io/preload/) are widely adopted.
 
@@ -67,6 +69,8 @@ Now open your console
 * `npm run test` - Runs unit tests.
 * `npm run test:watch` - Same as `npm test` but watches files for changes.
 * `npm run test:cov` - Generates a test coverage report.
+
+## Semantic Release
 
 ## Distribution
 Execute one of the following commands
