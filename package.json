@@ -46,6 +46,7 @@
     "semantic-release": "^4.3.5",
     "sinon": "^1.17.3",
     "sinon-chai": "2.8.0",
+    "uglifyjs": "2.4.10",
     "webpack": "1.12.13"
   },
   "engines": {
